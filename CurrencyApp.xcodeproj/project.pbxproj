@@ -16,6 +16,7 @@
 		0BEB95AF291F945E001A477C /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEB95AE291F945E001A477C /* Coordinator.swift */; };
 		0BEB95B4291F96B1001A477C /* CurrencyExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEB95B2291F96B1001A477C /* CurrencyExchangeViewController.swift */; };
 		0BEB95B5291F96B1001A477C /* CurrencyExchangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BEB95B3291F96B1001A477C /* CurrencyExchangeViewController.xib */; };
+		0BEB95BB291F9BA8001A477C /* CurrencyExchangeDomainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEB95BA291F9BA8001A477C /* CurrencyExchangeDomainModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		0BEB95AE291F945E001A477C /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		0BEB95B2291F96B1001A477C /* CurrencyExchangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyExchangeViewController.swift; sourceTree = "<group>"; };
 		0BEB95B3291F96B1001A477C /* CurrencyExchangeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyExchangeViewController.xib; sourceTree = "<group>"; };
+		0BEB95BA291F9BA8001A477C /* CurrencyExchangeDomainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyExchangeDomainModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,10 +179,51 @@
 		0BEB95B0291F95D8001A477C /* CurrencyExchange */ = {
 			isa = PBXGroup;
 			children = (
+				0BEB95B6291F9A49001A477C /* Presentation */,
+				0BEB95B7291F9A5C001A477C /* Domain */,
+				0BEB95B8291F9A65001A477C /* Data */,
+			);
+			path = CurrencyExchange;
+			sourceTree = "<group>";
+		};
+		0BEB95B6291F9A49001A477C /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
 				0BEB95B2291F96B1001A477C /* CurrencyExchangeViewController.swift */,
 				0BEB95B3291F96B1001A477C /* CurrencyExchangeViewController.xib */,
 			);
-			path = CurrencyExchange;
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		0BEB95B7291F9A5C001A477C /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				0BEB95BC291F9E43001A477C /* UseCase */,
+				0BEB95B9291F9B1F001A477C /* Model */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		0BEB95B8291F9A65001A477C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		0BEB95B9291F9B1F001A477C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0BEB95BA291F9BA8001A477C /* CurrencyExchangeDomainModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0BEB95BC291F9E43001A477C /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BEB9579291F913B001A477C /* AppDelegate.swift in Sources */,
+				0BEB95BB291F9BA8001A477C /* CurrencyExchangeDomainModel.swift in Sources */,
 				0BEB95B4291F96B1001A477C /* CurrencyExchangeViewController.swift in Sources */,
 				0BEB95AF291F945E001A477C /* Coordinator.swift in Sources */,
 			);
