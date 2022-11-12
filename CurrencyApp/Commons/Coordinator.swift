@@ -19,7 +19,7 @@ class AppCoordinator {
     }
     
     func start() {
-        let currencyExchangeViewController = CurrencyExchangeViewController()
+        let currencyExchangeViewController = CurrencyExchangeViewController(viewModel: CurrencyExchangeViewModel())
         navigationController = UINavigationController(rootViewController: currencyExchangeViewController)
         window.rootViewController = navigationController
         window.makeKeyAndVisible()

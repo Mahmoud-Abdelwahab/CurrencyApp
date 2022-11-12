@@ -31,6 +31,10 @@
 		0BEB95E129200066001A477C /* ExchangeCurrencyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEB95E029200066001A477C /* ExchangeCurrencyResponse.swift */; };
 		0BEB95E3292000DB001A477C /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEB95E2292000DB001A477C /* BaseResponse.swift */; };
 		0BEB95E62920140C001A477C /* LosslessStringConvertible+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEB95E52920140C001A477C /* LosslessStringConvertible+Ext.swift */; };
+		0BEB95E829202CFB001A477C /* UIButton+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEB95E729202CFB001A477C /* UIButton+Extention.swift */; };
+		0BEB95EA29202D40001A477C /* CurrencyExchangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEB95E929202D40001A477C /* CurrencyExchangeViewModel.swift */; };
+		0BEB95EC292030FE001A477C /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEB95EB292030FE001A477C /* UseCase.swift */; };
+		0BEB95EF29203DEA001A477C /* DropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEB95EE29203DEA001A477C /* DropDownMenu.swift */; };
 		7FC21658CD9E6C74686DFB2A /* Pods_CurrencyApp_CurrencyAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44131E3E7B0A1D5CB55FDDF /* Pods_CurrencyApp_CurrencyAppUITests.framework */; };
 		D6E7C6A2946EA427FA93720C /* Pods_CurrencyAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA9B1A31496F5EB0E82A329B /* Pods_CurrencyAppTests.framework */; };
 		D7B5EF831AA87E96A86587A9 /* Pods_CurrencyApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A8CD7A101DE77D515AA4F8 /* Pods_CurrencyApp.framework */; };
@@ -83,6 +87,10 @@
 		0BEB95E029200066001A477C /* ExchangeCurrencyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeCurrencyResponse.swift; sourceTree = "<group>"; };
 		0BEB95E2292000DB001A477C /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		0BEB95E52920140C001A477C /* LosslessStringConvertible+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LosslessStringConvertible+Ext.swift"; sourceTree = "<group>"; };
+		0BEB95E729202CFB001A477C /* UIButton+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extention.swift"; sourceTree = "<group>"; };
+		0BEB95E929202D40001A477C /* CurrencyExchangeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyExchangeViewModel.swift; sourceTree = "<group>"; };
+		0BEB95EB292030FE001A477C /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
+		0BEB95EE29203DEA001A477C /* DropDownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownMenu.swift; sourceTree = "<group>"; };
 		10A8CD7A101DE77D515AA4F8 /* Pods_CurrencyApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CurrencyApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26A996730C8D2ECD2B3D45AC /* Pods-CurrencyApp-CurrencyAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyApp-CurrencyAppUITests.release.xcconfig"; path = "Target Support Files/Pods-CurrencyApp-CurrencyAppUITests/Pods-CurrencyApp-CurrencyAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		77F0A9C8FC0A1D1059081B6B /* Pods-CurrencyApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyApp.debug.xcconfig"; path = "Target Support Files/Pods-CurrencyApp/Pods-CurrencyApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -232,6 +240,7 @@
 		0BEB95AD291F944F001A477C /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				0BEB95ED29203DD2001A477C /* DropDownMenu */,
 				0BEB95D9291FDC97001A477C /* Base */,
 				0BEB95CC291FBCF6001A477C /* Network */,
 				0BEB95AE291F945E001A477C /* Coordinator.swift */,
@@ -254,6 +263,7 @@
 			children = (
 				0BEB95B2291F96B1001A477C /* CurrencyExchangeViewController.swift */,
 				0BEB95B3291F96B1001A477C /* CurrencyExchangeViewController.xib */,
+				0BEB95E929202D40001A477C /* CurrencyExchangeViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -366,6 +376,7 @@
 			children = (
 				0BEB95DB291FDE58001A477C /* APIError.swift */,
 				0BEB95E2292000DB001A477C /* BaseResponse.swift */,
+				0BEB95EB292030FE001A477C /* UseCase.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -382,8 +393,17 @@
 			isa = PBXGroup;
 			children = (
 				0BEB95E52920140C001A477C /* LosslessStringConvertible+Ext.swift */,
+				0BEB95E729202CFB001A477C /* UIButton+Extention.swift */,
 			);
 			path = Extentions;
+			sourceTree = "<group>";
+		};
+		0BEB95ED29203DD2001A477C /* DropDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				0BEB95EE29203DEA001A477C /* DropDownMenu.swift */,
+			);
+			path = DropDownMenu;
 			sourceTree = "<group>";
 		};
 		BBF889DBBEB393E4850E0A3E /* Frameworks */ = {
@@ -644,13 +664,17 @@
 				0BEB95E62920140C001A477C /* LosslessStringConvertible+Ext.swift in Sources */,
 				0BEB95E129200066001A477C /* ExchangeCurrencyResponse.swift in Sources */,
 				0BEB95BE291F9EA2001A477C /* DoExchangeUseCase.swift in Sources */,
+				0BEB95E829202CFB001A477C /* UIButton+Extention.swift in Sources */,
 				0BEB95E3292000DB001A477C /* BaseResponse.swift in Sources */,
+				0BEB95EF29203DEA001A477C /* DropDownMenu.swift in Sources */,
 				0BEB95C1291F9F31001A477C /* CurrencyExchangeRepositoryProtocol.swift in Sources */,
 				0BEB95B4291F96B1001A477C /* CurrencyExchangeViewController.swift in Sources */,
 				0BEB95C4291FB618001A477C /* ExchangeCurrencyRepository.swift in Sources */,
 				0BEB95C9291FB6AE001A477C /* CurrencyExchangeRemoteDataSource.swift in Sources */,
 				0BEB95CB291FB6FD001A477C /* CurrencyExchangeLocalDataSource.swift in Sources */,
+				0BEB95EA29202D40001A477C /* CurrencyExchangeViewModel.swift in Sources */,
 				0BEB95AF291F945E001A477C /* Coordinator.swift in Sources */,
+				0BEB95EC292030FE001A477C /* UseCase.swift in Sources */,
 				0BEB95D5291FD68B001A477C /* Constants.swift in Sources */,
 				0BEB95DC291FDE58001A477C /* APIError.swift in Sources */,
 			);

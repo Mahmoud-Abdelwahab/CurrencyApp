@@ -9,6 +9,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CurrencyExchangeViewController" customModule="CurrencyApp" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="IcU-Be-6hj" id="bS0-WZ-GWW"/>
+                <outlet property="fromButton" destination="afB-ix-mr7" id="b2n-5H-q6C"/>
+                <outlet property="fromTextField" destination="uPF-lV-szE" id="6yZ-Ug-SST"/>
+                <outlet property="toButton" destination="vhL-sW-aKi" id="A2b-VC-8Dj"/>
+                <outlet property="toTextField" destination="Cz9-7Z-137" id="2cE-vG-2lO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,9 +21,92 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="xQU-Z5-ea9">
+                    <rect key="frame" x="20" y="94" width="350" height="91.333333333333314"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="vQA-lk-Cld">
+                            <rect key="frame" x="0.0" y="0.0" width="99.333333333333329" height="91.333333333333329"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afB-ix-mr7">
+                                    <rect key="frame" x="0.0" y="0.0" width="99.333333333333329" height="34.333333333333336"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="From" image="arrowtriangle.down"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="From"/>
+                                    <connections>
+                                        <action selector="fromButtonDidTapped:" destination="-1" eventType="touchUpInside" id="2oN-Bd-MhU"/>
+                                    </connections>
+                                </button>
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uPF-lV-szE">
+                                    <rect key="frame" x="0.0" y="57.333333333333343" width="99.333333333333329" height="34"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LhB-uZ-qRx">
+                            <rect key="frame" x="125.33333333333334" y="0.0" width="99.333333333333343" height="38.333333333333336"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="arrow.left.and.right" catalog="system"/>
+                            <connections>
+                                <action selector="reverseButtonDidTapped:" destination="-1" eventType="touchUpInside" id="7aW-HW-4JZ"/>
+                            </connections>
+                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="eDT-Jj-f8m">
+                            <rect key="frame" x="250.66666666666671" y="0.0" width="99.333333333333343" height="91.333333333333329"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhL-sW-aKi">
+                                    <rect key="frame" x="0.0" y="0.0" width="99.333333333333329" height="34.333333333333336"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="To"/>
+                                    <connections>
+                                        <action selector="toButtonDidTapped:" destination="-1" eventType="touchUpInside" id="pPZ-Vn-F34"/>
+                                    </connections>
+                                </button>
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cz9-7Z-137">
+                                    <rect key="frame" x="0.0" y="57.333333333333343" width="99.333333333333329" height="34"/>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Aa-Me-KWQ">
+                    <rect key="frame" x="171.66666666666666" y="228.33333333333334" width="47" height="30.000000000000028"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Details"/>
+                    <connections>
+                        <action selector="detailsButtonDidTapped:" destination="-1" eventType="touchUpInside" id="2nW-Bn-srO"/>
+                    </connections>
+                </button>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="IcU-Be-6hj">
+                    <rect key="frame" x="176.66666666666666" y="403.66666666666669" width="37" height="37"/>
+                </activityIndicatorView>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="0.82352941180000006" green="0.5411764979" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="xQU-Z5-ea9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="47" id="1sP-96-CJs"/>
+                <constraint firstItem="IcU-Be-6hj" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="6uI-gj-Oci"/>
+                <constraint firstItem="xQU-Z5-ea9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="ILp-oK-mdo"/>
+                <constraint firstItem="IcU-Be-6hj" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="XdA-48-bYe"/>
+                <constraint firstItem="6Aa-Me-KWQ" firstAttribute="top" secondItem="xQU-Z5-ea9" secondAttribute="bottom" constant="43" id="dMV-Ob-wdA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xQU-Z5-ea9" secondAttribute="trailing" constant="20" id="ljD-Yt-iEI"/>
+                <constraint firstItem="6Aa-Me-KWQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="p1o-23-21T"/>
+            </constraints>
             <point key="canvasLocation" x="114" y="-12"/>
         </view>
     </objects>
+    <resources>
+        <image name="arrow.left.and.right" catalog="system" width="128" height="76"/>
+        <image name="arrowtriangle.down" width="128" height="128"/>
+    </resources>
 </document>
