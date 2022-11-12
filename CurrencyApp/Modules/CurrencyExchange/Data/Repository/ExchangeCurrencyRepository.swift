@@ -22,6 +22,7 @@ class ExchangeCurrencyRepository: CurrencyExchangeRepositoryProtocol{
 
 extension  ExchangeCurrencyRepository {
     func doExchange(from: String, to: String) async throws -> String {
+        
        try await remoteDataSource.doExchange(from: from, to: to)
     }
     

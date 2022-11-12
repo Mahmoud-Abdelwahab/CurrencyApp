@@ -12,37 +12,17 @@ protocol CurrencyExchangeLocalDataSourceProtocol{
 
 class CurrencyExchangeLocalDataSource: CurrencyExchangeLocalDataSourceProtocol {
     fileprivate  let defaultCurrencySymbolTable = [
-        "AUD" ,
-        "BGN" ,
-        "BRL" ,
+        "USD" ,
+        "EUR",
+        "GBP" ,
         "CAD" ,
         "CHF" ,
-        "CNY" ,
-        "CZK" ,
-        "DKK" ,
-        "GBP" ,
-        "HKD" ,
-        "HRK" ,
-        "HUF" ,
-        "IDR" ,
-        "ILS" ,
-        "INR" ,
         "JPY" ,
-        "KRW" ,
-        "MXN" ,
-        "MYR" ,
-        "NOK" ,
-        "NZD" ,
-        "PHP" ,
-        "PLN" ,
-        "RON" ,
-        "RUB" ,
-        "SEK" ,
-        "SGD" ,
-        "THB" ,
-        "TRY" ,
-        "USD" ,
-        "ZAR"
+        "KWD" ,
+        "SAR" ,
+        "AED" ,
+        "QAR" ,
+        "EGP"
     ]
     
     func getLocalCurrencyList() -> [String] {
