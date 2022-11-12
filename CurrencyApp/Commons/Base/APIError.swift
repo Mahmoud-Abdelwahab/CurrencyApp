@@ -8,7 +8,7 @@
 import Foundation
 // MARK: - API Errors
 
-enum APIError: Error {
+public enum APIError: Error {
     case decodingError
     case noData
     case with(ErrorDetail)
@@ -30,11 +30,12 @@ enum APIError: Error {
         }
     }
 }
-struct CurrencyLayerError: Error, Decodable {
-    let error: ErrorDetail
+
+public struct CurrencyLayerError: Error, Decodable {
+    let error: ResponseError
 }
 
-struct ErrorDetail: Decodable {
+public struct ErrorDetail: Decodable {
     let code: Int
     let info: String
 }

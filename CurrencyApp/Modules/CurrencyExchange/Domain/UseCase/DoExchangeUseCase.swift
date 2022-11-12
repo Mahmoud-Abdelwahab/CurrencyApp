@@ -8,7 +8,7 @@
 import Foundation
 
 class DoExchangeUseCase {
-    let repository: CurrencyExchangeRepositoryProtocol
+    private let repository: CurrencyExchangeRepositoryProtocol
     init(repository: CurrencyExchangeRepositoryProtocol = ExchangeCurrencyRepository()){
         self.repository = repository
     }

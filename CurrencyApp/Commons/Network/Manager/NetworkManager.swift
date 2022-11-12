@@ -13,9 +13,8 @@ class NetworkManager  {
     
     private init() {}
     
-    func sendRequest<T>(urlRequest: Alamofire.URLRequestConvertible) async throws -> T where T : Decodable {
+    func sendRequest<T>(urlRequest: Alamofire.URLRequestConvertible) async throws -> T  where T: Decodable {
         try await withCheckedThrowingContinuation { continuation in
-            
             let request = AF.request(urlRequest)
             request.responseDecodable(of: T.self, completionHandler: { response in
                 guard let data = response.data else {
@@ -26,11 +25,11 @@ class NetworkManager  {
                     if let model = try? JSONDecoder().decode(T.self, from: data) {
                         continuation.resume(returning: model)
                     } else {
-                        let currencyLayerError = try JSONDecoder().decode(CurrencyLayerError.self, from: data)
-                        continuation.resume(throwing: APIError.with(currencyLayerError.error))
+                        let currencyLayerError = try JSONDecoder().decode(ResponseError.self, from: data)
+                        continuation.resume(throwing: APIError.with(ErrorDetail(code: currencyLayerError.code ?? 0, info: currencyLayerError.info ?? "")))
                     }
                 } catch {
-                    continuation.resume(throwing: APIError.unknownError)
+                    continuation.resume(throwing: APIError.decodingError)
                 }
             })
         }

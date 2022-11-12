@@ -8,8 +8,8 @@
 import UIKit
 
 class CurrencyExchangeViewController: UIViewController {
-
-    init() {
+   
+    init() {      
         super.init(nibName: String(describing: type(of: self)), bundle: nil)
     }
     

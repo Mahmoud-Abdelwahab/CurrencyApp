@@ -9,8 +9,8 @@ import Foundation
 
 class ExchangeCurrencyRepository: CurrencyExchangeRepositoryProtocol{
     
-    let localDataSource: CurrencyExchangeLocalDataSourceProtocol
-    let remoteDataSource: CurrencyExchangeRemoteDataSourceProtocol
+    private let localDataSource: CurrencyExchangeLocalDataSourceProtocol
+    private let remoteDataSource: CurrencyExchangeRemoteDataSourceProtocol
     init(localDataSource: CurrencyExchangeLocalDataSourceProtocol = CurrencyExchangeLocalDataSource(),
          remoteDataSource: CurrencyExchangeRemoteDataSourceProtocol = CurrencyExchangeRemoteDataSource()
     ){
@@ -23,7 +23,7 @@ class ExchangeCurrencyRepository: CurrencyExchangeRepositoryProtocol{
 extension  ExchangeCurrencyRepository {
     func doExchange(from: String, to: String, amount: Double) async throws -> String {
         if Connectivity.isConnectedToInternet {
-           return try await remoteDataSource.doExchange(from: from, to: to, amount: amount)
+            return try await remoteDataSource.doExchange(from: from, to: to, amount: amount).result?.description  ?? "0.0"
         }else {
             throw APIError.connectionError
         }

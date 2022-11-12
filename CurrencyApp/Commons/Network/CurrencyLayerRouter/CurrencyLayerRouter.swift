@@ -44,6 +44,7 @@ enum CurrencyLayerRouter: URLRequestConvertible {
         let url = try Constants.baseURL.asURL()
         var request = URLRequest(url: url.appendingPathComponent(path))
         request.httpMethod = method.rawValue
+        request.headers = header
         return try URLEncoding.default.encode(request, with: parameters)
     }
 
