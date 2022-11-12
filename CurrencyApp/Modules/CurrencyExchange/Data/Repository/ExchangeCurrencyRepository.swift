@@ -22,7 +22,11 @@ class ExchangeCurrencyRepository: CurrencyExchangeRepositoryProtocol{
 
 extension  ExchangeCurrencyRepository {
     func doExchange(from: String, to: String, amount: Double) async throws -> String {
-        try await remoteDataSource.doExchange(from: from, to: to, amount: amount)
+        if Connectivity.isConnectedToInternet {
+           return try await remoteDataSource.doExchange(from: from, to: to, amount: amount)
+        }else {
+            throw APIError.connectionError
+        }
     }
     
     func getCurrencyList() -> [String] {
