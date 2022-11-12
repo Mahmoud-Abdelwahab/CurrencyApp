@@ -13,8 +13,8 @@ class DoExchangeUseCase {
         self.repository = repository
     }
     
-    func excute(from: String, to: String) async throws -> String{
-       try await repository.doExchange(from: from, to: to)
+    func excute(from: String, to: String, amount: Double) async throws -> String{
+       try await repository.doExchange(from: from, to: to, amount: amount)
     }
 
 }
