@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+
 protocol CurrencyExchangeRepositoryProtocol {
     func doExchange(from: String, to: String) async throws -> String
     func getCurrencyList() -> [String]

@@ -9,16 +9,16 @@ import Foundation
 
 class CurrencyExchangeUseCase {
     let repository: CurrencyExchangeRepositoryProtocol
-    init(repository: CurrencyExchangeRepositoryProtocol = CurrencyExchangeRepository()){
+    init(repository: CurrencyExchangeRepositoryProtocol = ExchangeCurrencyRepository()){
         self.repository = repository
     }
     
     func doExchange(from: String, to: String) async throws -> String{
-        "24.5"
+       try await repository.doExchange(from: from, to: to)
     }
     
     func getCurrencyList() -> [String] {
-        ["USD","EGP"]
+        repository.getCurrencyList()
     }
     
 }
