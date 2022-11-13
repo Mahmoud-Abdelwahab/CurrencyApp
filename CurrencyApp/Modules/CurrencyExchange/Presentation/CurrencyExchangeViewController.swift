@@ -9,17 +9,20 @@ import UIKit
 import RxSwift
 import RxCocoa
 class CurrencyExchangeViewController: UIViewController {
+    //MARK: - Outlites
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var fromTextField: UITextField!
     @IBOutlet weak var toTextField: UITextField!
     @IBOutlet weak var toButton: UIButton!
     @IBOutlet weak var fromButton: UIButton!
     
+    //MARK: - Variables
     let disposeBag = DisposeBag()
-    let viewModel: CurrencyExchangeViewModel
+    var viewModel: CurrencyExchangeViewModelProtocol
     var myMenu: DropDownMenuProtocol?
     
-    init(viewModel: CurrencyExchangeViewModel) {
+    //MARK: - Initialization
+    init(viewModel: CurrencyExchangeViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: String(describing: type(of: self)), bundle: nil)
     }
@@ -35,7 +38,7 @@ class CurrencyExchangeViewController: UIViewController {
         ButtonsStyling()
         setupDropDownMenu()
         setupUI()
-     
+        
     }
     
     private func ButtonsStyling(){
@@ -62,6 +65,7 @@ class CurrencyExchangeViewController: UIViewController {
         fromTextField.text = viewModel.amountSubject.value.description
     }
     
+    //MARK: - DataBinding
     private func bindUI() {
         
         viewModel
@@ -80,7 +84,6 @@ class CurrencyExchangeViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        
         viewModel
             .screenSubject
             .observe(on: MainScheduler.instance)
@@ -89,34 +92,32 @@ class CurrencyExchangeViewController: UIViewController {
                 self.handleScreenState(state: state)
             }.disposed(by: disposeBag)
         
-    
         fromTextField.rx.text
             .skip(1)
             .observe(on: MainScheduler.instance)
-            .debounce(.milliseconds(700), scheduler: MainScheduler.instance)
+            .debounce(.milliseconds(900), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .compactMap({$0?.toDouble()})
             .do(onNext: {_ in self.viewModel.currentState = .from})
             .bind(to: self.viewModel.amountSubject)
             .disposed(by: disposeBag)
-
-        toTextField.rx.text
-            .skip(1)
-            .observe(on: MainScheduler.instance)
-            .debounce(.milliseconds(700), scheduler: MainScheduler.instance)
-            .distinctUntilChanged()
-            .compactMap({$0?.toDouble()})
-            .do(onNext: {_ in self.viewModel.currentState = .to})
-            .bind(to: self.viewModel.amountSubject)
-            .disposed(by: disposeBag)
-
         
-        viewModel.amountSubject.subscribe(onNext: {[weak self] in
-            guard let self = self else {return}
-            self.onAmountChanged(amount: $0)
-        }).disposed(by: disposeBag)
-                
-    }
+                toTextField.rx.text
+                .skip(1)
+                .observe(on: MainScheduler.instance)
+                .debounce(.milliseconds(900), scheduler: MainScheduler.instance)
+                .distinctUntilChanged()
+                .compactMap({$0?.toDouble()})
+                .do(onNext: {_ in self.viewModel.currentState = .to})
+                .bind(to: self.viewModel.amountSubject)
+                    .disposed(by: disposeBag)
+                    
+                    viewModel.amountSubject.subscribe(onNext: {[weak self] in
+                        guard let self = self else {return}
+                        self.onAmountChanged(amount: $0)
+                    }).disposed(by: disposeBag)
+                    
+                    }
     
     private func onAmountChanged(amount: Double) {
         var from = ""
@@ -144,7 +145,7 @@ class CurrencyExchangeViewController: UIViewController {
             self.showAlert(message: message)
         }
     }
-
+    
     private func doExchange(from: String, to: String, amount: Double){
         Task{
             viewModel.doExchange(from: from, to: to, amount: amount)
@@ -160,10 +161,11 @@ class CurrencyExchangeViewController: UIViewController {
         }
     }
     
+    //MARK: - Actions
     @IBAction func toButtonDidTapped(_ sender: UIButton) {
         viewModel.currentState = .to
         myMenu?.showMenu(anchore: sender)
-
+        
     }
     
     @IBAction func fromButtonDidTapped(_ sender: UIButton) {

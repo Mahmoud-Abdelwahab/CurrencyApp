@@ -18,6 +18,7 @@ enum DetailsScreenState {
 
 class CurrencyDetailsViewModel {
     
+    //MARK: - Variables
     private let getOtherCurrencyUseCase: GetOtherCurrencyUseCase
     private let getHistoricalDataUseCase: GetHistoricalDataUseCase
     private (set) var screenState = PublishSubject<DetailsScreenState>()
@@ -32,6 +33,7 @@ class CurrencyDetailsViewModel {
         Helper.getSymboleListStringWithoutBase(array: localSymbole, base: base)
     }
     
+    //MARK: - Initialization
     init(base: String, localSymbols: [String]) {
         self.getOtherCurrencyUseCase = GetOtherCurrencyUseCase()
         self.getHistoricalDataUseCase = GetHistoricalDataUseCase()
@@ -50,8 +52,8 @@ class CurrencyDetailsViewModel {
                 try await screenState.onNext(.otherCurrencyData(otherCurrency))
                 let  fullHistory = try await HistoryCurrecnyListDomainModel(
                     currencyList: [
-                    history1 , history2, history3
-                ])
+                        history1 , history2, history3
+                    ])
                 screenState.onNext(.historyData(fullHistory))
             }catch(let error){
                 screenState.onNext(.showMessage(error.localizedDescription))
@@ -59,7 +61,7 @@ class CurrencyDetailsViewModel {
             screenState.onNext(.hideLoader)
         }
     }
-  
+    
 }
 
 

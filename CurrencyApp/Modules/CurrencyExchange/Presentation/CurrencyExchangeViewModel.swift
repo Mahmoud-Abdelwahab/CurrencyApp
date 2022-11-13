@@ -9,17 +9,30 @@ import Foundation
 import RxSwift
 import RxRelay
 
+protocol CurrencyExchangeViewModelProtocol {
+    var currentState: CurrentState {set get}
+    var currencyList: [String] {get}
+    var fromSubject  : BehaviorRelay<String> {get}
+    var toSubject    : BehaviorRelay<String> {get}
+    var amountSubject: BehaviorRelay<Double> {get}
+    var screenSubject: PublishSubject<CurrencyExchangeState> {get}
+    func doExchange(from: String, to: String, amount: Double)
+    func getCurrencySymboleList() -> [String]
+    func navigateToCurrencyDetails()
+}
 
-class CurrencyExchangeViewModel {
-    var fromSubject    = BehaviorRelay<String>(value: "USD")
+class CurrencyExchangeViewModel: CurrencyExchangeViewModelProtocol {
+    //MARK: - Variables
+    let fromSubject    = BehaviorRelay<String>(value: "USD")
     let toSubject      = BehaviorRelay<String>(value: "EGP")
     let amountSubject  = BehaviorRelay<Double>(value: 1.0)
-    var screenSubject  = PublishSubject<CurrencyExchangeState>()
+    let screenSubject  = PublishSubject<CurrencyExchangeState>()
     var currentState = CurrentState.from
-    var  currencyList =  [String]()
+    var currencyList =  [String]()
     private let currencyListUseCase: GetCurrencyListUseCase
     private let doExchangeUseCase: DoExchangeUseCase
-    init( ) {
+    
+    init() {
         self.currencyListUseCase = GetCurrencyListUseCase()
         self.doExchangeUseCase = DoExchangeUseCase()
     }
@@ -29,14 +42,14 @@ class CurrencyExchangeViewModel {
         Task {
             do {
                 let result =  try await  doExchangeUseCase.excute(from: from, to: to, amount: amount)
-                  screenSubject.onNext(.result(result))
+                screenSubject.onNext(.result(result))
             }catch(let error) {
                 print(error)
                 screenSubject.onNext(.showMessage(error.localizedDescription))
             }
             screenSubject.onNext(.hideLodar)
         }
-       
+        
     }
     
     func getCurrencySymboleList() -> [String] {

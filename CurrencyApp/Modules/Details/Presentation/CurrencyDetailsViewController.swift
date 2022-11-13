@@ -10,12 +10,17 @@ import RxSwift
 
 class CurrencyDetailsViewController: UIViewController {
     
+    //MARK: - Outlites
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var otherCurrencyTableView: UITableView!
     @IBOutlet weak var historyTableView: UITableView!
+    
+    //MARK: - Variables
     let disposeBag = DisposeBag()
     let viewModel: CurrencyDetailsViewModel
     let historyTableViewDataSource: HistoryOperationTableViewDataSource?
+    
+    //MARK: - Initialization
     init(viewModel: CurrencyDetailsViewModel, historyTableViewDataSource : HistoryOperationTableViewDataSource) {
         self.viewModel = viewModel
         self.historyTableViewDataSource = historyTableViewDataSource
@@ -69,8 +74,6 @@ class CurrencyDetailsViewController: UIViewController {
         historyTableViewDataSource?.currencyList = currencyList
         historyTableView.reloadData()
     }
-    
-    
     
     private func startLoding(){
         activityIndicator.startAnimating()

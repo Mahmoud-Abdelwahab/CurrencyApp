@@ -22,22 +22,22 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H8R-zS-34r">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                     <color key="backgroundColor" systemColor="systemGreenColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="250" id="Nfr-wE-iun"/>
+                        <constraint firstAttribute="height" constant="150" id="Nfr-wE-iun"/>
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="za4-al-LDf">
-                    <rect key="frame" x="0.0" y="250" width="375" height="417"/>
+                    <rect key="frame" x="0.0" y="150" width="375" height="517"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9nt-qj-hBj">
-                            <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="417"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="517"/>
+                            <color key="backgroundColor" red="0.82352941180000006" green="0.5411764979" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </tableView>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QVD-nN-pPS">
-                            <rect key="frame" x="187.66666666666663" y="0.0" width="187.33333333333337" height="417"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <rect key="frame" x="187.66666666666663" y="0.0" width="187.33333333333337" height="517"/>
+                            <color key="backgroundColor" red="0.82352941180000006" green="0.5411764979" blue="0.58039218189999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </tableView>
                     </subviews>
                 </stackView>
@@ -62,9 +62,6 @@
         </view>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
