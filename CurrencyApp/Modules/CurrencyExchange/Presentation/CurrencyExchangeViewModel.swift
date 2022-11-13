@@ -9,18 +9,14 @@ import Foundation
 import RxSwift
 import RxRelay
 
-enum CurrencyExchangeState {
-    case hideLodar
-    case showLoader
-    case result(String)
-    case showMessage(String)
-}
+
 class CurrencyExchangeViewModel {
     var fromSubject    = BehaviorRelay<String>(value: "USD")
     let toSubject      = BehaviorRelay<String>(value: "EGP")
     let amountSubject  = BehaviorRelay<Double>(value: 1.0)
     var screenSubject  = PublishSubject<CurrencyExchangeState>()
     var currentState = CurrentState.from
+    var  currencyList =  [String]()
     private let currencyListUseCase: GetCurrencyListUseCase
     private let doExchangeUseCase: DoExchangeUseCase
     init( ) {
@@ -44,6 +40,11 @@ class CurrencyExchangeViewModel {
     }
     
     func getCurrencySymboleList() -> [String] {
-        currencyListUseCase.excute()
+        currencyList = currencyListUseCase.excute()
+        return currencyList
+    }
+    
+    func navigateToCurrencyDetails() {
+        AppCoordinator.shared.navigateToCurrencyDetails(baseSymbole: fromSubject.value, localSymbole: currencyList)
     }
 }

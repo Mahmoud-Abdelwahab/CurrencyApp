@@ -25,8 +25,9 @@ class AppCoordinator {
         window.makeKeyAndVisible()
     }
     
-    func navigateToCurrencyDetails(baseCoin: String) {
-        
+    func navigateToCurrencyDetails(baseSymbole: String, localSymbole: [String]) {
+        let currencyDetailsViewController = CurrencyDetailsViewController(viewModel: CurrencyDetailsViewModel(base: baseSymbole, localSymbols: localSymbole))
+        navigationController?.pushViewController(currencyDetailsViewController, animated: true)
     }
     
 }

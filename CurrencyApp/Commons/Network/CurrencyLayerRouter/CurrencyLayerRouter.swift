@@ -9,8 +9,8 @@ import Alamofire
 enum CurrencyLayerRouter: URLRequestConvertible {
 
     case exchange(from: String, to: String, amount: Double)
-    case getOtherCurrency(base: String, symbols: [String])
-    case getHistoicalData( date: String, base: String, symbols: [String])
+    case getOtherCurrency(base: String, symbols: String)
+    case getHistoicalData( date: String, base: String, symbols: String)
     var method: HTTPMethod {
         switch self {
         case .exchange,.getOtherCurrency,.getHistoicalData:
@@ -43,6 +43,7 @@ enum CurrencyLayerRouter: URLRequestConvertible {
                 "base": base,
                 "symbols": symbols
             ]
+            
         case .getHistoicalData(_,let base,let symbols):
               return [
                 "base": base,
@@ -54,14 +55,23 @@ enum CurrencyLayerRouter: URLRequestConvertible {
     var header: HTTPHeaders{
         return HTTPHeaders(["apikey": Constants.apiKey])
     }
-    
+    var encoding: ParameterEncoding {
+        switch self {
+        case .exchange:
+            return URLEncoding.default
+        case .getOtherCurrency:
+            return  URLEncoding(destination: .queryString, arrayEncoding: .noBrackets)
+        case .getHistoicalData:
+            return  URLEncoding(destination: .queryString, arrayEncoding: .noBrackets)
+        }
+    }
 
     func asURLRequest() throws -> URLRequest {
         let url = try Constants.baseURL.asURL()
         var request = URLRequest(url: url.appendingPathComponent(path))
         request.httpMethod = method.rawValue
         request.headers = header
-        return try URLEncoding.default.encode(request, with: parameters)
+       return try encoding.encode(request, with: parameters)
     }
 
 }

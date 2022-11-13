@@ -11,3 +11,10 @@ enum CurrentState {
     case from
     case to
 }
+
+enum CurrencyExchangeState {
+    case hideLodar
+    case showLoader
+    case result(String)
+    case showMessage(String)
+}

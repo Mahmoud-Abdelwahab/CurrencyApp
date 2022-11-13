@@ -13,9 +13,7 @@ class GetOtherCurrencyUseCase {
         self.repository = repository
     }
 
-    func excute(base: String, symbols: [String]) async throws -> CurrencyDomainModel {
-        try await repository.getOtherCurrency(base: base, symbols: [])
+    func excute(base: String, symbols: String) async throws -> CurrencyDomainModel {
+        try await repository.getOtherCurrency(base: base, symbols: symbols)
     }
-   
-
 }

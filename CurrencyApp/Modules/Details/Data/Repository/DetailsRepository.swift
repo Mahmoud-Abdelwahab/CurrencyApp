@@ -18,7 +18,7 @@ class DetailsRepository: DetailsRepositoryProtocol{
 }
 
 extension  DetailsRepository {
-    func getOtherCurrency(base: String, symbols: [String]) async throws -> CurrencyDomainModel {
+    func getOtherCurrency(base: String, symbols: String) async throws -> CurrencyDomainModel {
         if Connectivity.isConnectedToInternet {
             return try await remoteDataSource.getOtherCurrency(base: base, symbols: symbols).toDomainModel()
         }else {
@@ -26,7 +26,7 @@ extension  DetailsRepository {
         }
     }
     
-    func getHistoicalData(for date: String, base: String, symbols: [String]) async throws -> CurrencyDomainModel {
+    func getHistoicalData(for date: String, base: String, symbols: String) async throws -> CurrencyDomainModel {
         if Connectivity.isConnectedToInternet {
             return try await remoteDataSource.getHistoicalData(for: date, base: base, symbols: symbols).toDomainModel()
         }else {

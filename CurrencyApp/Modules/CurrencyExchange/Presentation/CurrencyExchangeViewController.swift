@@ -179,7 +179,7 @@ class CurrencyExchangeViewController: UIViewController {
     }
     
     @IBAction func detailsButtonDidTapped(_ sender: Any) {
-        
+        viewModel.navigateToCurrencyDetails()
     }
     
     

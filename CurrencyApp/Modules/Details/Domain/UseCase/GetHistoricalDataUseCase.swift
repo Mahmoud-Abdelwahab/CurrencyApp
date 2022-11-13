@@ -13,7 +13,7 @@ class GetHistoricalDataUseCase {
         self.repository = repository
     }
 
-    func excute(date: String, base: String, symbols: [String]) async throws -> CurrencyDomainModel {
+    func excute(date: String, base: String, symbols: String) async throws -> CurrencyDomainModel {
         try await repository.getHistoicalData(for: date, base: base, symbols: symbols)
     }
    
