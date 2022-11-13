@@ -9,3 +9,9 @@ import Foundation
 extension LosslessStringConvertible {
     var string: String { .init(self) }
 }
+
+extension String {
+    func toDouble() -> Double? {
+        return NumberFormatter().number(from: self)?.doubleValue
+    }
+}

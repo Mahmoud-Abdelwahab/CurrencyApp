@@ -26,7 +26,7 @@ struct Info: Codable {
 // MARK: - Query
 struct Query: Codable {
     let from, to: String?
-    let amount: Int?
+    let amount: Double?
 }
 
 

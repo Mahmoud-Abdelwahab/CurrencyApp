@@ -87,7 +87,7 @@
                         <action selector="detailsButtonDidTapped:" destination="-1" eventType="touchUpInside" id="2nW-Bn-srO"/>
                     </connections>
                 </button>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="IcU-Be-6hj">
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="IcU-Be-6hj">
                     <rect key="frame" x="176.66666666666666" y="403.66666666666669" width="37" height="37"/>
                 </activityIndicatorView>
             </subviews>

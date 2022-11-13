@@ -16,7 +16,7 @@ enum CurrencyExchangeState {
     case showMessage(String)
 }
 class CurrencyExchangeViewModel {
-    let fromSubject    = BehaviorRelay<String>(value: "USD")
+    var fromSubject    = BehaviorRelay<String>(value: "USD")
     let toSubject      = BehaviorRelay<String>(value: "EGP")
     let amountSubject  = BehaviorRelay<Double>(value: 1.0)
     var screenSubject  = PublishSubject<CurrencyExchangeState>()
