@@ -26,7 +26,7 @@ class AppCoordinator {
     }
     
     func navigateToCurrencyDetails(baseSymbole: String, localSymbole: [String]) {
-        let currencyDetailsViewController = CurrencyDetailsViewController(viewModel: CurrencyDetailsViewModel(base: baseSymbole, localSymbols: localSymbole))
+        let currencyDetailsViewController = CurrencyDetailsViewController(viewModel: CurrencyDetailsViewModel(base: baseSymbole, localSymbols: localSymbole), historyTableViewDataSource: HistoryOperationTableViewDataSource())
         navigationController?.pushViewController(currencyDetailsViewController, animated: true)
     }
     

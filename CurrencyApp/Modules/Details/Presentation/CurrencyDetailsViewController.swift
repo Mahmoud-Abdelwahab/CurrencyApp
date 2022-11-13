@@ -15,9 +15,10 @@ class CurrencyDetailsViewController: UIViewController {
     @IBOutlet weak var historyTableView: UITableView!
     let disposeBag = DisposeBag()
     let viewModel: CurrencyDetailsViewModel
-    
-    init(viewModel: CurrencyDetailsViewModel) {
+    let historyTableViewDataSource: HistoryOperationTableViewDataSource?
+    init(viewModel: CurrencyDetailsViewModel, historyTableViewDataSource : HistoryOperationTableViewDataSource) {
         self.viewModel = viewModel
+        self.historyTableViewDataSource = historyTableViewDataSource
         super.init(nibName: String(describing: type(of: self)), bundle: nil)
     }
     
@@ -65,10 +66,8 @@ class CurrencyDetailsViewController: UIViewController {
     }
     
     private func  pupulatHistoyTableView(currencyList: [CurrencyDomainModel]){
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Int>>(configureCell: configureCell)
-        Observable.just([SectionModel(model: "title", items: [1, 2, 3])])
-            .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
+        historyTableViewDataSource?.currencyList = currencyList
+        historyTableView.reloadData()
     }
     
     
@@ -88,7 +87,8 @@ extension CurrencyDetailsViewController {
     private func  configureTableView() {
         otherCurrencyTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         historyTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        
+        historyTableView.dataSource = historyTableViewDataSource
+        historyTableView.delegate   = historyTableViewDataSource
     }
 }
 
