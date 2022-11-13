@@ -236,6 +236,7 @@
 		0BEB95AC291F9430001A477C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				0BEB95F829210522001A477C /* Details */,
 				0BEB95B0291F95D8001A477C /* CurrencyExchange */,
 			);
 			path = Modules;
@@ -410,6 +411,13 @@
 				0BEB95EE29203DEA001A477C /* DropDownMenu.swift */,
 			);
 			path = DropDownMenu;
+			sourceTree = "<group>";
+		};
+		0BEB95F829210522001A477C /* Details */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Details;
 			sourceTree = "<group>";
 		};
 		BBF889DBBEB393E4850E0A3E /* Frameworks */ = {
