@@ -7,14 +7,14 @@
 
 import Foundation
 
-class DoExchangeUseCase: UseCase {
+class DoExchangeUseCase {
     private let repository: CurrencyExchangeRepositoryProtocol
     init(repository: CurrencyExchangeRepositoryProtocol = ExchangeCurrencyRepository()){
         self.repository = repository
     }
 
-    func excute(input: (from: String, to: String, amount: Double)) async throws -> String {
-        try await repository.doExchange(from: input.from, to: input.to, amount: input.amount)
+    func excute(from: String, to: String, amount: Double) async throws -> String {
+        try await repository.doExchange(from: from, to: to, amount: amount)
     }
     
 

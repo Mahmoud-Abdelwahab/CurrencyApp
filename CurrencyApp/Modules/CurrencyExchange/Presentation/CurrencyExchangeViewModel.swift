@@ -7,24 +7,43 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
+enum CurrencyExchangeState {
+    case hideLodar
+    case showLoader
+    case result(String)
+    case showMessage(String)
+}
 class CurrencyExchangeViewModel {
-    let fromSubject = BehaviorSubject<String>(value: "USD")
-    let toSubject   = BehaviorSubject<String>(value: "EGP")
-    let amount      = BehaviorSubject<Double>(value: 1.0)
-    
-    let currencyListUseCase: DoExchangeUseCase
-    init(currencyListUseCase: any UseCase = DoExchangeUseCase() ) {
-        self.currencyListUseCase = currencyListUseCase as! DoExchangeUseCase
+    let fromSubject    = BehaviorRelay<String>(value: "USD")
+    let toSubject      = BehaviorRelay<String>(value: "EGP")
+    let amountSubject  = BehaviorRelay<Double>(value: 1.0)
+    var screenSubject  = PublishSubject<CurrencyExchangeState>()
+    var currentState = CurrentState.from
+    private let currencyListUseCase: GetCurrencyListUseCase
+    private let doExchangeUseCase: DoExchangeUseCase
+    init( ) {
+        self.currencyListUseCase = GetCurrencyListUseCase()
+        self.doExchangeUseCase = DoExchangeUseCase()
     }
     
-    func doExchange(from: String, to: String, amount: Double) async{
-        do {
-          let result =  try await  currencyListUseCase.excute(input: (from: from, to: to, amount: amount))
-            print(result)
-        }catch(let error) {
-            print(error)
+    func doExchange(from: String, to: String, amount: Double)  {
+        screenSubject.onNext(.showLoader)
+        Task {
+            do {
+                let result =  try await  doExchangeUseCase.excute(from: from, to: to, amount: amount)
+                  screenSubject.onNext(.result(result))
+            }catch(let error) {
+                print(error)
+                screenSubject.onNext(.showMessage(error.localizedDescription))
+            }
+            screenSubject.onNext(.hideLodar)
         }
+       
+    }
     
+    func getCurrencySymboleList() -> [String] {
+        currencyListUseCase.excute()
     }
 }
