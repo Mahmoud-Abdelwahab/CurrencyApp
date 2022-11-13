@@ -29,8 +29,8 @@ class CurrencyExchangeViewModel: CurrencyExchangeViewModelProtocol {
     let screenSubject  = PublishSubject<CurrencyExchangeState>()
     var currentState = CurrentState.from
     var currencyList =  [String]()
-    private let currencyListUseCase: GetCurrencyListUseCase
-    private let doExchangeUseCase: DoExchangeUseCase
+    private let currencyListUseCase: GetCurrencyListUseCaseProtocol
+    private let doExchangeUseCase: DoExchangeUseCaseProtocol
     
     init() {
         self.currencyListUseCase = GetCurrencyListUseCase()

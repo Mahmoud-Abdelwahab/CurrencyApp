@@ -6,8 +6,11 @@
 //
 
 import Foundation
+protocol GetOtherCurrencyUseCaseProtocol {
+    func excute(base: String, symbols: String) async throws -> CurrencyDomainModel
+}
 
-class GetOtherCurrencyUseCase {
+class GetOtherCurrencyUseCase: GetOtherCurrencyUseCaseProtocol {
     private let repository: DetailsRepositoryProtocol
     init(repository: DetailsRepositoryProtocol = DetailsRepository()){
         self.repository = repository

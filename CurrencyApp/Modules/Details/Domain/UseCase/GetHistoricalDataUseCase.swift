@@ -6,8 +6,11 @@
 //
 
 import Foundation
+protocol GetHistoricalDataUseCaseProtocol {
+    func excute(date: String, base: String, symbols: String) async throws -> CurrencyDomainModel
+}
 
-class GetHistoricalDataUseCase {
+class GetHistoricalDataUseCase: GetHistoricalDataUseCaseProtocol {
     private let repository: DetailsRepositoryProtocol
     init(repository: DetailsRepositoryProtocol = DetailsRepository()){
         self.repository = repository

@@ -6,8 +6,11 @@
 //
 
 import Foundation
+protocol GetCurrencyListUseCaseProtocol {
+    func excute() -> [String]
+}
 
-class GetCurrencyListUseCase {
+class GetCurrencyListUseCase: GetCurrencyListUseCaseProtocol {
     private let repository: CurrencyExchangeRepositoryProtocol
     init(repository: CurrencyExchangeRepositoryProtocol = ExchangeCurrencyRepository()){
         self.repository = repository

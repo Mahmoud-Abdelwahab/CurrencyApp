@@ -93,7 +93,7 @@ class CurrencyExchangeViewController: UIViewController {
             }.disposed(by: disposeBag)
         
         fromTextField.rx.text
-            .skip(1)
+            .skip(2)
             .observe(on: MainScheduler.instance)
             .debounce(.milliseconds(900), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
@@ -102,16 +102,16 @@ class CurrencyExchangeViewController: UIViewController {
             .bind(to: self.viewModel.amountSubject)
             .disposed(by: disposeBag)
         
-                toTextField.rx.text
-                .skip(1)
+        toTextField.rx.text
+            .skip(2)
                 .observe(on: MainScheduler.instance)
                 .debounce(.milliseconds(900), scheduler: MainScheduler.instance)
                 .distinctUntilChanged()
                 .compactMap({$0?.toDouble()})
                 .do(onNext: {_ in self.viewModel.currentState = .to})
                 .bind(to: self.viewModel.amountSubject)
-                    .disposed(by: disposeBag)
-                    
+                .disposed(by: disposeBag)
+                
                     viewModel.amountSubject.subscribe(onNext: {[weak self] in
                         guard let self = self else {return}
                         self.onAmountChanged(amount: $0)
