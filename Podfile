@@ -10,6 +10,7 @@ target 'CurrencyApp' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'Alamofire'
+  pod 'DropDown'
   target 'CurrencyAppTests' do
     inherit! :search_paths
     # Pods for testing
