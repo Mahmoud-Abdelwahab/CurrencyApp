@@ -9,10 +9,11 @@ import Alamofire
 enum CurrencyLayerRouter: URLRequestConvertible {
 
     case exchange(from: String, to: String, amount: Double)
-    
+    case getOtherCurrency(base: String, symbols: [String])
+    case getHistoicalData( date: String, base: String, symbols: [String])
     var method: HTTPMethod {
         switch self {
-        case .exchange:
+        case .exchange,.getOtherCurrency,.getHistoicalData:
             return .get
         }
     }
@@ -21,6 +22,10 @@ enum CurrencyLayerRouter: URLRequestConvertible {
         switch self {
         case .exchange:
             return "fixer/convert"
+        case .getOtherCurrency:
+            return "fixer/latest"
+        case .getHistoicalData(let date, _, _):
+            return "fixer/\(date)"
         }
     }
 
@@ -31,6 +36,17 @@ enum CurrencyLayerRouter: URLRequestConvertible {
                 "from": from,
                 "to": to,
                 "amount": amount
+            ]
+            
+        case .getOtherCurrency(let base, let symbols):
+            return [
+                "base": base,
+                "symbols": symbols
+            ]
+        case .getHistoicalData(_,let base,let symbols):
+              return [
+                "base": base,
+                "symbols": symbols
             ]
         }
     }
