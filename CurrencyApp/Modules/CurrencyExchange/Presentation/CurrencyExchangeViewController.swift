@@ -33,12 +33,11 @@ class CurrencyExchangeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bindUI()
-        doExchange(from: viewModel.fromSubject.value, to: viewModel.toSubject.value, amount: viewModel.amountSubject.value)
-        ButtonsStyling()
         setupDropDownMenu()
+        bindUI()
+        doExchange()
+        ButtonsStyling()
         setupUI()
-        
     }
     
     private func ButtonsStyling(){
@@ -117,20 +116,35 @@ class CurrencyExchangeViewController: UIViewController {
                         self.onAmountChanged(amount: $0)
                     }).disposed(by: disposeBag)
                     
+                    myMenu?.selectedSymbolSubject
+                    .observe(on: MainScheduler.instance)
+                    .subscribe(onNext: {[weak self] symbole in
+                        guard let self else{return}
+                        self.onSelectedSymboleMenuChanged(symbole: symbole)
+                    }).disposed(by: disposeBag)
+                    
                     }
     
-    private func onAmountChanged(amount: Double) {
-        var from = ""
-        var to   = ""
+    private func onSelectedSymboleMenuChanged(symbole: String) {
         switch self.viewModel.currentState {
         case .from:
-            from = self.viewModel.fromSubject.value
-            to   = self.viewModel.toSubject.value
+            self.viewModel.fromSubject.accept(symbole)
         case .to:
-            from = self.viewModel.toSubject.value
-            to   = self.viewModel.fromSubject.value
+            self.viewModel.toSubject.accept(symbole)
         }
-        self.doExchange(from: from, to: to, amount: amount)
+        self.doExchange()
+    }
+    
+    private func onAmountChanged(amount: Double) {
+        if case .to =  self.viewModel.currentState {
+            Task{
+                viewModel.doExchange(from: viewModel.toSubject.value,
+                                     to: viewModel.fromSubject.value,
+                                     amount: amount)
+            }
+        }else{
+            self.doExchange()
+        }
     }
     
     func handleScreenState(state: CurrencyExchangeState) {
@@ -146,9 +160,11 @@ class CurrencyExchangeViewController: UIViewController {
         }
     }
     
-    private func doExchange(from: String, to: String, amount: Double){
+    private func doExchange(){
         Task{
-            viewModel.doExchange(from: from, to: to, amount: amount)
+            viewModel.doExchange(from: viewModel.fromSubject.value,
+                                 to: viewModel.toSubject.value,
+                                 amount: viewModel.amountSubject.value)
         }
     }
     
@@ -177,7 +193,7 @@ class CurrencyExchangeViewController: UIViewController {
         let temp = viewModel.fromSubject.value
         viewModel.fromSubject.accept(viewModel.toSubject.value)
         viewModel.toSubject.accept(temp)
-        doExchange(from: viewModel.fromSubject.value, to: viewModel.toSubject.value, amount: viewModel.amountSubject.value)
+        doExchange()
     }
     
     @IBAction func detailsButtonDidTapped(_ sender: Any) {

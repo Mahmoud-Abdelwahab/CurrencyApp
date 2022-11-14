@@ -34,4 +34,8 @@ struct Helper {
         }
         return days
     }
+    
+    static func validateTwoSymbolesAreDifferent(sybmbole1: String, symbole2: String)-> Bool {
+         sybmbole1  != symbole2
+    }
 }

@@ -38,18 +38,20 @@ class CurrencyExchangeViewModel: CurrencyExchangeViewModelProtocol {
     }
     
     func doExchange(from: String, to: String, amount: Double)  {
-        screenSubject.onNext(.showLoader)
-        Task {
-            do {
-                let result =  try await  doExchangeUseCase.excute(from: from, to: to, amount: amount)
-                screenSubject.onNext(.result(result))
-            }catch(let error) {
-                print(error)
-                screenSubject.onNext(.showMessage(error.localizedDescription))
+        if Helper.validateTwoSymbolesAreDifferent(sybmbole1: from, symbole2: to){
+            screenSubject.onNext(.showLoader)
+            Task {
+                do {
+                    let result =  try await  doExchangeUseCase.excute(from: from, to: to, amount: amount)
+                    screenSubject.onNext(.result(result))
+                }catch(let error) {
+                    print(error)
+                    screenSubject.onNext(.showMessage(error.localizedDescription))
+                }
+                screenSubject.onNext(.hideLodar)
+            }} else{
+                screenSubject.onNext(.showMessage("From and To must not match..."))
             }
-            screenSubject.onNext(.hideLodar)
-        }
-        
     }
     
     func getCurrencySymboleList() -> [String] {
