@@ -24,5 +24,5 @@ public struct BaseResponse<T: Codable>: BaseResponseProtocol {
 // MARK: - Error
 public struct ResponseError: Codable {
     let code: Int?
-    let type, info: String?
+    let message, type, info: String?
 }

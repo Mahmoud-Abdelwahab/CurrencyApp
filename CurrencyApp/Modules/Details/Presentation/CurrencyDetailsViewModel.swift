@@ -53,8 +53,8 @@ class CurrencyDetailsViewModel {
             do {
                 async let otherCurrency =  getOtherCurrencyUseCase.excute(base: base, symbols: commonSymboles)
                 try await screenState.onNext(.otherCurrencyData(otherCurrency))
-            }catch(let error){
-                screenState.onNext(.showMessage(error.localizedDescription))
+            }catch(let error as APIError){
+                screenState.onNext(.showMessage(error.message))
             }
         }
     }

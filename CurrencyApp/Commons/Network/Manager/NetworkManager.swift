@@ -22,11 +22,11 @@ class NetworkManager  {
                     return
                 }
                 do {
-                    if let model = try? JSONDecoder().decode(T.self, from: data) {
+                    if response.response?.statusCode == 200, let model = try? JSONDecoder().decode(T.self, from: data) {
                         continuation.resume(returning: model)
                     } else {
                         let currencyLayerError = try JSONDecoder().decode(ResponseError.self, from: data)
-                        continuation.resume(throwing: APIError.with(ErrorDetail(code: currencyLayerError.code ?? 0, info: currencyLayerError.info ?? "")))
+                        continuation.resume(throwing: APIError.with(ErrorDetail(code: currencyLayerError.code ?? 0, info: currencyLayerError.info ?? currencyLayerError.message ?? "")))
                     }
                 } catch {
                     continuation.resume(throwing: APIError.decodingError)

@@ -44,9 +44,8 @@ class CurrencyExchangeViewModel: CurrencyExchangeViewModelProtocol {
                 do {
                     let result =  try await  doExchangeUseCase.excute(from: from, to: to, amount: amount)
                     screenSubject.onNext(.result(result))
-                }catch(let error) {
-                    print(error)
-                    screenSubject.onNext(.showMessage(error.localizedDescription))
+                }catch(let error as APIError) {
+                    screenSubject.onNext(.showMessage(error.message))
                 }
                 screenSubject.onNext(.hideLodar)
             }} else{
