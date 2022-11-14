@@ -33,8 +33,8 @@ class CurrencyDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTableView()
         bindUI()
+        configureTableView()
         viewModel.fechData()
     }
     

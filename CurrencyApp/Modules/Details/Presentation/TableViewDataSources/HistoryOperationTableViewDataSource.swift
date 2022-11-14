@@ -12,7 +12,6 @@ class HistoryOperationTableViewDataSource:NSObject, UITableViewDataSource,UITabl
     var currencyList: [CurrencyDomainModel]?
     
     override init() {
-        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -28,7 +27,7 @@ class HistoryOperationTableViewDataSource:NSObject, UITableViewDataSource,UITabl
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
         cell.textLabel?.text = currencyList?[indexPath.section].otherCurrencyList[indexPath.row]
         return cell
     }

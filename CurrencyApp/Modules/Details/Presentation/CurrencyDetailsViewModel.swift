@@ -42,40 +42,23 @@ class CurrencyDetailsViewModel {
     }
     
     func fechData()  {
-        screenState.onNext(.showLoader)
-        getOtherCurrency()
-        getHistoryData()
-        screenState.onNext(.hideLoader)
-    }
-    
-    func getOtherCurrency(){
         Task {
+            screenState.onNext(.showLoader)
             do {
                 async let otherCurrency =  getOtherCurrencyUseCase.excute(base: base, symbols: commonSymboles)
+                async let history1      =  getHistoricalDataUseCase.excute(date: lastThreeDays[0], base: base, symbols: commonSymboles)
+                async let history2      = getHistoricalDataUseCase.excute(date:  lastThreeDays[1], base: base, symbols: commonSymboles)
+                async let history3      =  getHistoricalDataUseCase.excute(date: lastThreeDays[2], base: base, symbols: commonSymboles)
                 try await screenState.onNext(.otherCurrencyData(otherCurrency))
+                let  fullHistory = try await HistoryCurrecnyListDomainModel(
+                    currencyList: [
+                        history1 , history2, history3
+                    ])
+                screenState.onNext(.historyData(fullHistory))
             }catch(let error as APIError){
                 screenState.onNext(.showMessage(error.message))
             }
-        }
-    }
-    
-    func getHistoryData() {
-        Task {
-            var currencyList: [CurrencyDomainModel] = []
-            try await withThrowingTaskGroup(of: CurrencyDomainModel.self, body: {[weak self] group in
-                guard let self else {return}
-                for date in lastThreeDays {
-                    group.addTask {
-                        async let image = self.getHistoricalDataUseCase.excute(date: date, base: self.base, symbols: self.commonSymboles)
-                        return try await image
-                    }
-                }
-                for try await model in group {
-                    currencyList += [model]
-                }
-            })
-            let  fullHistory =  HistoryCurrecnyListDomainModel(currencyList: currencyList)
-            screenState.onNext(.historyData(fullHistory))
+            screenState.onNext(.hideLoader)
         }
     }
     
